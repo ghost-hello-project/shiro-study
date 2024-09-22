@@ -1,4 +1,4 @@
-package com.laolang.jx.module.admin.controller;
+package com.laolang.jx.module.admin.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
