@@ -1,4 +1,4 @@
-package com.laolang.jx;
+package com.laolang.jx.authorizingrealm;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -13,12 +13,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Slf4j
-public class ShiroTest {
+public class CustomAuthorizingRealmTest {
 
     @Test
-    public void testHelloWorld(){
+    public void testCustomAuthorizingRealm() {
+        String iniPath = "classpath:com/laolang/jx/authorizingrealm/shiro-custom-authorizing-realm.ini";
         // 1. 获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory(iniPath);
         // 2. 得到SecurityManager实例 并绑定给SecurityUtils
         SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
@@ -26,10 +27,10 @@ public class ShiroTest {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken("zhang", "123");
 
-        try{
+        try {
             // 4. 登录
             subject.login(token);
-        }catch (AuthenticationException e){
+        } catch (AuthenticationException e) {
             // 5. 身份验证失败
             log.error("身份验证失败 :{}", ExceptionUtils.getMessage(e));
         }
