@@ -20,6 +20,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
@@ -55,17 +56,13 @@
         <property name="order" value="0"/>
     </bean>
 
-    <!-- 自定义静态资源处理 -->
-    <bean id="customServletHttpRequestHandler"
-          class="com.laolang.jx.framework.web.handler.CustomServletHttpRequestHandler"/>
-
-    <!-- 自定义的 HandlerMapping -->
-    <bean
-            class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="defaultHandler"
-                  ref="customServletHttpRequestHandler"/>
-    </bean>
-
     <!-- 静态资源配置 -->
     <mvc:resources mapping="/favicon.ico" location="favicon.ico"/>
+
+    <bean name="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>
 </beans>

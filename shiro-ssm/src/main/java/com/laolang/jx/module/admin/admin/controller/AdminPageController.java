@@ -11,8 +11,5 @@ public class AdminPageController {
         return "admin/error/404";
     }
 
-    @RequestMapping("/admin/error/403")
-    public String error403() {
-        return "admin/error/403";
-    }
+
 }

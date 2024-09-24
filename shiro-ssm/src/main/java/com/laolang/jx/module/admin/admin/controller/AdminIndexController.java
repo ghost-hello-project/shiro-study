@@ -1,5 +1,6 @@
 package com.laolang.jx.module.admin.admin.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +16,17 @@ public class AdminIndexController {
         return "admin/index";
     }
 
-    @GetMapping("/admin/dashboard")
-    public String dashboard(Model model) {
+    @RequiresPermissions("admin:system:dict:typeList")
+    @GetMapping("/admin/dict")
+    public String dict(Model model) {
         model.addAttribute("msg", "km 系统");
-        return "admin/dashboard";
+        return "admin/dict";
+    }
+
+    @RequiresPermissions("seller:product:getInfo")
+    @GetMapping("/admin/product")
+    public String product(Model model) {
+        model.addAttribute("msg", "km 系统");
+        return "admin/product";
     }
 }

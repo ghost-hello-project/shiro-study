@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="filterChain" class="java.lang.String">
+        <constructor-arg>
+            <value>
+                /auth/admin/login = anon
+                /admin/** = authc
+                /portal/** = anon
+                /portal/manager = authc
+            </value>
+        </constructor-arg>
+    </bean>
+    <bean id="adminRealm" class="com.laolang.jx.module.auth.shiro.realm.AdminRealm"/>
+    <bean id="portalRealm" class="com.laolang.jx.module.auth.shiro.realm.PortalRealm"/>
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realms">
+            <list>
+                <ref bean="adminRealm"/>
+                <ref bean="portalRealm"/>
+            </list>
+        </property>
+        <property name="authenticator">
+            <bean class="com.laolang.jx.module.auth.shiro.authc.CustomModularRealmAuthenticator">
+                <property name="realms">
+                    <list>
+                        <ref bean="adminRealm"/>
+                        <ref bean="portalRealm"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="authFormAuthenticationFilter"
+          class="com.laolang.jx.module.auth.shiro.filter.AuthFormAuthenticationFilter"/>
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="filterChainDefinitions" ref="filterChain"/>
+        <property name="filters">
+            <map>
+                <entry key="authc" value-ref="authFormAuthenticationFilter"/>
+            </map>
+        </property>
+    </bean>
+
+
+</beans>

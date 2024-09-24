@@ -29,6 +29,9 @@
         <!-- freemarker -->
         <freemarker.version>2.3.32</freemarker.version>
 
+        <!-- shiro -->
+        <shiro.version>1.13.0</shiro.version>
+
         <!-- 数据库 -->
         <mybatis-plus.version>3.5.1</mybatis-plus.version>
         <mysql-connector-j.version>8.0.33</mysql-connector-j.version>
@@ -111,6 +114,23 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>${freemarker.version}</version>
+        </dependency>
+
+        <!-- shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
         </dependency>
 
         <!-- 数据库 -->
