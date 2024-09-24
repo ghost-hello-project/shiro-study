@@ -16,6 +16,15 @@ public class AuthUtil {
         return StrUtil.startWith(request.getRequestURI(), AuthConst.PORTAL_URL_PREFIX);
     }
 
+    public static String getNotfoundViewName(HttpServletRequest request) {
+        if (matchAdminUrl(request)) {
+            return AuthConst.ADMIN_NOT_FOUND_VIEW_NAME;
+        } else if (matchPortalUrl(request)) {
+            return AuthConst.PORTAL_NOT_FOUND_VIEW_NAME;
+        }
+        return getErrorViewName(request);
+    }
+
     public static String getForbiddenViewName(HttpServletRequest request) {
         if (matchAdminUrl(request)) {
             return AuthConst.ADMIN_FORBIDDEN_VIEW_NAME;

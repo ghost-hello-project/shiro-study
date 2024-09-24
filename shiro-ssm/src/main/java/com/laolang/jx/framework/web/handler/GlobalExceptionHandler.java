@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
             r.fillModelAndView(mv);
         } else {
             mv = new ModelAndView();
-            mv.setViewName(AuthUtil.getForbiddenViewName(request));
+            mv.setViewName(AuthUtil.getNotfoundViewName(request));
         }
         return mv;
     }
