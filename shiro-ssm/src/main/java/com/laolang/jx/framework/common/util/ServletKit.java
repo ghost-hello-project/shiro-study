@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class RequestKit {
+public class ServletKit {
 
     /**
      * 是否是Ajax异步请求

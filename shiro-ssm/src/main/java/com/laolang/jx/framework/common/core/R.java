@@ -9,6 +9,7 @@ import java.util.Map;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.slf4j.MDC;
+import org.springframework.web.servlet.ModelAndView;
 
 @Accessors(chain = true)
 @Data
@@ -67,6 +68,17 @@ public class R<T> {
         setMsg(e.getMsg());
         setCode(e.getCode());
         setSuccess(false);
+    }
+
+    @JsonIgnore
+    public void fillModelAndView(ModelAndView modelAndView) {
+        modelAndView.addObject("code", code);
+        modelAndView.addObject("success", success);
+        modelAndView.addObject("code", msg);
+        modelAndView.addObject("body", null);
+        modelAndView.addObject("extra", null);
+        modelAndView.addObject("time", time);
+        modelAndView.addObject("tid", tid);
     }
 
     public static <T> R<T> ok() {
